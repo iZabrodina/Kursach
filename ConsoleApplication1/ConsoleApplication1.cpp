@@ -1,4 +1,4 @@
-﻿#include <locale.h>
+#include <locale.h>
 #include <iostream>
 #include <conio.h>
 #include <stdlib.h>
@@ -59,7 +59,17 @@ int main()
     for (int i = 0; i < kolvo_comb; i++)
         resource[i] = new int[kolvo_comb];
     int* x = new int[kolvo_comb];
-    int* y = new int[kolvo_comb];
+    double* y = new double[kolvo_comb];
+
+    for (int i = 0; i < kolvo_comb; i++)
+    {
+        x[i] = 0;
+        y[i] = 0;
+        first_work[i] = 0;
+        second_work[i] = 0;
+        max_new_res[i] = 0;
+    }
+    
 
 
     const int  alfa = 1, beta = 1, gamma = 1;      //штрафы для критериев
@@ -341,6 +351,15 @@ int main()
     int* direct_second_work = new int[kolvo_dir_work];
     int* direct_index = new int[kolvo_dir_work];
     bool b = true;
+
+    for (int i = 0; i < kolvo_comb; i++)
+    {
+        direct_time[i] = 0;
+        direct_first_work[i] = 0;
+        direct_second_work[i] = 0;
+        direct_index[i] = 0;
+    }
+
     for (int i = 0; i < kolvo_dir_work; i++)
     {
         b = false;
@@ -458,7 +477,7 @@ int main()
         else
         {
             sost = false;
-            sumRatedTime = gamma * 100 * (double)((y[direct_index[i]] - direct_time[i]) / direct_time[i]);
+            sumRatedTime = sumRatedTime + gamma * 100 * (float)((y[direct_index[i]] - direct_time[i]) / direct_time[i]);
             break;
         }
         if (sost == false)
@@ -619,4 +638,8 @@ int main()
     delete[] tek_lenght;
     delete[] max_tek_length;
     delete[] z;
-}
+    delete[] direct_index;
+    delete[] direct_time;
+    delete[] direct_first_work;
+    delete[] direct_second_work;
+ }
